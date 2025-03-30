@@ -4,8 +4,8 @@ import { useState } from 'react'
 
 
 const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'Meet Our Pets', href: '#' },
+    { name: 'Home', href: '/' },
+    { name: 'Meet Our Pets', href: '/pets' },
     { name: 'Put Up Pet For Adoption', href: '#' },
     { name: 'Contact Us', href: '#' },
 ]
