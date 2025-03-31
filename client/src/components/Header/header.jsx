@@ -1,12 +1,13 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { useState } from 'react'
+import { Link } from 'react-router'
 
 
 const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Meet Our Pets', href: '/pets' },
-    { name: 'Put Up Pet For Adoption', href: '#' },
+    { name: 'Put Up Pet For Adoption', href: 'put-up-for-adoption' },
     { name: 'Contact Us', href: '#' },
 ]
 
@@ -17,15 +18,15 @@ export default function Header() {
         <header className="absolute inset-x-0 top-0 z-50">
             <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
                 <div className="flex lg:flex-1">
-                    <a href="#" className="-m-1.5 p-1.5">
+                    <Link to="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Pet Adoption Center</span>
                         <img
                             alt="Pet Adoption"
                             src='/public/images/HappyTailsLogo.png'
-                            className="h-20 w-auto rounded-lg"
+                            className="border-4 border-yellow-400 rounded-lg shadow-[0_0_10px_#facc15] h-20 w-auto rounded-lg"
                         />
 
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex lg:hidden">
                     <button
@@ -39,29 +40,29 @@ export default function Header() {
                 </div>
                 <div className="hidden lg:flex lg:gap-x-12">
                     {navigation.map((item) => (
-                        <a key={item.name} href={item.href} className="text-sm font-semibold text-gray-900">
+                        <Link key={item.name} to={item.href} className="text-sm font-semibold text-gray-900">
                             {item.name}
-                        </a>
+                        </Link>
                     ))}
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="#adopt" className="text-sm font-semibold text-gray-900">
+                    <Link to="#adopt" className="text-sm font-semibold text-gray-900">
                         Adopt Now <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    </Link>
                 </div>
             </nav>
             <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
                 <div className="fixed inset-0 z-50" />
                 <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <a href="#" className="-m-1.5 p-1.5">
+                        <Link to="#" className="-m-1.5 p-1.5">
                             <span className="sr-only">Pet Adoption Center</span>
                             <img
                                 alt="Pet Adoption"
                                 src='/public/images/HappyTailsLogo.png'
                                 className="h-20 w-auto rounded-lg"
                             />
-                        </a>
+                        </Link>
                         <button
                             type="button"
                             onClick={() => setMobileMenuOpen(false)}
@@ -75,22 +76,22 @@ export default function Header() {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
-                                        href={item.href}
+                                        to={item.href}
                                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
                                     >
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                             <div className="py-6">
-                                <a
-                                    href="#adopt"
+                                <Link
+                                    to="#adopt"
                                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
                                 >
                                     Adopt Now
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

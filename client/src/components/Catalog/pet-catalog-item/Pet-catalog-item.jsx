@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 export default function PetItem({
     id,
     name,
@@ -8,6 +10,8 @@ export default function PetItem({
     description,
     imageUrl,
 }) {
+
+    console.log("petId in catalogItem - ", id)
     return (
 
         <div key={id} className="group relative">
@@ -19,11 +23,12 @@ export default function PetItem({
             <div className="mt-4 flex justify-between">
                 <div>
                     <h3 className="text-sm text-gray-700">
-                        <a href={"#"}>
+                        <Link to={`/pets/details/${id}`}>
                             <span aria-hidden="true" className="absolute inset-0" />
                             {name}
-                        </a>
+                        </Link>
                     </h3>
+                    <p className="mt-1 text-sm text-gray-500">{age} {age === 1 ? "year" : "years"} old</p>
                     <p className="mt-1 text-sm text-gray-500">{breed}</p>
                 </div>
             </div>
