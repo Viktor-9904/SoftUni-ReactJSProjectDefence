@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 
 export default function PetItem({
-    id,
+    _id,
     name,
     species,
     breed,
@@ -11,10 +11,9 @@ export default function PetItem({
     imageUrl,
 }) {
 
-    console.log("petId in catalogItem - ", id)
     return (
 
-        <div key={id} className="group relative">
+        <div key={_id} className="group relative">
             <img
                 alt={`${name} doesn't have any images. `}
                 src={imageUrl}
@@ -23,7 +22,7 @@ export default function PetItem({
             <div className="mt-4 flex justify-between">
                 <div>
                     <h3 className="text-sm text-gray-700">
-                        <Link to={`/pets/details/${id}`}>
+                        <Link to={`/pets/details/${_id}`}>
                             <span aria-hidden="true" className="absolute inset-0" />
                             {name}
                         </Link>

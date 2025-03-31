@@ -33,5 +33,23 @@ export default {
             console.error("Fetch Error:", error);
             throw error;
         }
-    }
+    },
+    async createPet(petData) {
+        try {
+            const response = await fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(petData),
+            });
+
+            const result = await response.json();
+            return result;
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            throw error;
+        }
+    },
 }

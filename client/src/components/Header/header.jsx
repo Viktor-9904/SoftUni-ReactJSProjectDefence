@@ -47,7 +47,7 @@ export default function Header() {
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <Link to="#adopt" className="text-sm font-semibold text-gray-900">
-                        Adopt Now <span aria-hidden="true">&rarr;</span>
+                        Profile <span aria-hidden="true">&rarr;</span>
                     </Link>
                 </div>
             </nav>
