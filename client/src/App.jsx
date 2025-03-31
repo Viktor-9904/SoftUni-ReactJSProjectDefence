@@ -1,10 +1,11 @@
 import './App.css'
 import { Routes, Route } from 'react-router'
-import Header from './components/Header/header'
+import Header from './components/header/Header'
 import Pets from './components/Catalog/pet-catalog'
-import Home from './components/Home/home'
+import Home from './components/home/Home'
 import PetDetails from './components/Details/Pet-Details'
 import CreatePet from './components/CreatePet/createPet'
+
 
 export default function App() {
 
