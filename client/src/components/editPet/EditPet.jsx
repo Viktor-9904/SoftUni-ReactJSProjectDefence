@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
+import petService from '../../services/petService'
+
 export default function EditPet(
     {
         PetData,
         onClose,
-        onSubmit 
     }) {
+
+    const navigate = useNavigate()
+    const { petId } = useParams()
+
+    const formAciton = async (formData) => {
+        const petData = Object.fromEntries(formData)
+
+        await petService.editPet(petId, petData)
+
+        navigate(`/pets/details/${petId}`)
+        onClose()
+
+    }
+
     return (
         <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50 bg-orange-300/50" onClick={onClose}>
             <div
@@ -21,7 +38,7 @@ export default function EditPet(
                     Edit Pet Details
                 </h2>
 
-                <form className="mt-4 grid gap-4">
+                <form className="mt-4 grid gap-4" action={formAciton}>
                     <input type="text" name="name" placeholder="Pet Name" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.name} />
 
                     <select name="species" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.species}>
@@ -49,7 +66,6 @@ export default function EditPet(
                     <button
                         type="submit"
                         className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                        onClick={onSubmit}
                     >
                         Update
                     </button>

@@ -1,3 +1,5 @@
+import EditPet from "../components/editPet/EditPet";
+
 const baseUrl = 'http://localhost:3030/jsonstore/pets'
 
 export default {
@@ -38,6 +40,24 @@ export default {
         try {
             const response = await fetch(baseUrl, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(petData),
+            });
+
+            const result = await response.json();
+            return result;
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            throw error;
+        }
+    },
+    async editPet(petId, petData) {
+        try {
+            const response = await fetch(`${baseUrl}/${petId}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },

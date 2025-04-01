@@ -33,7 +33,6 @@ export default function PetDetails() {
                 <EditPet
                     PetData={currentPet}
                     onClose={closeEditModalClickHandler}
-                    //onSubmit={submitEditModalClickHandler}
                 />)}
 
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-6">
