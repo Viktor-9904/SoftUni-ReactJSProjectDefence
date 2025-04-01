@@ -8,6 +8,7 @@ import EditPet from '../editPet/EditPet';
 export default function PetDetails() {
 
 
+    const [isUpdated, setIsUpdated] = useState(false)
     const [isEditModalVisible, setEditModal] = useState(false)
     const [isDeleteModalVisible, setDeleteModal] = useState(false)
     const [currentPet, setPet] = useState({})
@@ -25,14 +26,18 @@ export default function PetDetails() {
     const closeEditModalClickHandler = () => {
         setEditModal(false)
     }
+    const submitEditModalClickHandler = () => {
+        petService.getPetById(petId)
+            .then(setPet)
+    }
 
     return (
         <div className="min-h-screen pt-30">
 
             {isEditModalVisible && (
                 <EditPet
-                    PetData={currentPet}
                     onClose={closeEditModalClickHandler}
+                    onSubmit={submitEditModalClickHandler}
                 />)}
 
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-6">
@@ -60,14 +65,14 @@ export default function PetDetails() {
                             <div className="mt-10 flex space-x-3 justify-center">
                                 <button
                                     type="submit"
-                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-orange-400 px-6 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-orange-400 px-6 py-3 text-base font-medium text-white hover:bg-orange-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
                                 >
                                     Request Adoption
                                 </button>
 
                                 <button
                                     type="button"
-                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-green-500 px-6 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-green-500 px-6 py-3 text-base font-medium text-white hover:bg-green-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
                                     onClick={openEditModalClickHandler}
                                 >
                                     Edit
@@ -75,7 +80,7 @@ export default function PetDetails() {
 
                                 <button
                                     type="button"
-                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
                                 >
                                     Delete
                                 </button>

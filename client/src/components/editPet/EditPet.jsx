@@ -4,21 +4,28 @@ import petService from '../../services/petService'
 
 export default function EditPet(
     {
-        PetData,
         onClose,
+        onSubmit,
     }) {
 
     const navigate = useNavigate()
     const { petId } = useParams()
+    const [pet, setPet] = useState({})
+
+    useEffect(() => {
+        petService.getPetById(petId)
+            .then(setPet)
+    }, [petId])
 
     const formAciton = async (formData) => {
         const petData = Object.fromEntries(formData)
 
         await petService.editPet(petId, petData)
 
-        navigate(`/pets/details/${petId}`)
-        onClose()
+        navigate(`/pets/details/${petId}`);
 
+        onSubmit()
+        onClose()
     }
 
     return (
@@ -39,29 +46,19 @@ export default function EditPet(
                 </h2>
 
                 <form className="mt-4 grid gap-4" action={formAciton}>
-                    <input type="text" name="name" placeholder="Pet Name" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.name} />
+                    <input type="text" name="name" placeholder="Pet Name" className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.name} />
 
-                    <select name="species" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.species}>
-                        <option value="">Select Species</option>
-                        <option value="Dog">Dog</option>
-                        <option value="Cat">Cat</option>
-                        <option value="Rabbit">Rabbit</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <input type="text" name="species" placeholder="Cat, Dog, Rabbit, Fish, etc..." className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.species} />
 
-                    <input type="text" name="breed" placeholder="Breed" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.breed} />
+                    <input type="text" name="breed" placeholder="Breed" className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.breed} />
 
-                    <input type="number" name="age" placeholder="Age (years)" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.age} />
+                    <input type="number" name="age" placeholder="Age (years)" className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.age} />
 
-                    <select name="gender" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.gender}>
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
+                    <input type="text" name="gender" placeholder="Male/Female" className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.gender} />
 
-                    <textarea name="description" placeholder="Describe the pet..." className="w-full p-2 border rounded-md shadow-sm resize-none" rows="3" defaultValue={PetData.description}></textarea>
+                    <textarea name="description" placeholder="Describe the pet..." className="w-full p-2 border rounded-md shadow-sm resize-none" rows="3" defaultValue={pet.description}></textarea>
 
-                    <input type="text" name="imageUrl" placeholder="Photo URL" className="w-full p-2 border rounded-md shadow-sm" defaultValue={PetData.imageUrl} />
+                    <input type="text" name="imageUrl" placeholder="Photo URL" className="w-full p-2 border rounded-md shadow-sm" defaultValue={pet.imageUrl} />
 
                     <button
                         type="submit"
