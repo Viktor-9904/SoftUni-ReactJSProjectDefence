@@ -72,4 +72,19 @@ export default {
             throw error;
         }
     },
+    async deletePetById(petId) {
+        try {
+            const response = await fetch(`${baseUrl}/${petId}`, {
+                method: 'DELETE',
+            });
+    
+            const result = await response.json();
+    
+            return result;
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            throw error;
+        }
+    },
 }

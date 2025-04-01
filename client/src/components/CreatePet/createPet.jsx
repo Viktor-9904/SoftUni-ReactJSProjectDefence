@@ -8,8 +8,6 @@ export default function CreatePet() {
         const petData = Object.fromEntries(formData);
 
         const result = await petService.createPet(petData)
-
-        console.log(result)
         navigate('/pets')
     };
 

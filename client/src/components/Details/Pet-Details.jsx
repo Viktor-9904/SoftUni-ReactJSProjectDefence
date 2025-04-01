@@ -4,6 +4,7 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import { Link, useNavigate, useParams } from "react-router";
 import petService from '../../services/petService';
 import EditPet from '../editPet/EditPet';
+import DeletePet from '../deletePet/DeletePet';
 
 export default function PetDetails() {
 
@@ -30,6 +31,12 @@ export default function PetDetails() {
         petService.getPetById(petId)
             .then(setPet)
     }
+    const openDeleteModalClickHandler = () => {
+        setDeleteModal(true)
+    }
+    const closeDeleteModalClickHandler = () => {
+        setDeleteModal(false)
+    }
 
     return (
         <div className="min-h-screen pt-30">
@@ -38,6 +45,12 @@ export default function PetDetails() {
                 <EditPet
                     onClose={closeEditModalClickHandler}
                     onSubmit={submitEditModalClickHandler}
+                />)}
+
+            {isDeleteModalVisible && (
+                <DeletePet
+                    onClose={closeDeleteModalClickHandler}
+                    name={currentPet.name}
                 />)}
 
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-6">
@@ -81,6 +94,7 @@ export default function PetDetails() {
                                 <button
                                     type="button"
                                     className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                    onClick={openDeleteModalClickHandler}
                                 >
                                     Delete
                                 </button>
