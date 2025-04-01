@@ -1,4 +1,25 @@
+import { useEffect, useState } from "react";
+import petService from "../../services/petService";
+import NewestPet from "./newestAdditions/NewestPet";
+
 export default function Home() {
+
+    const [newestPets, setPets] = useState([])
+
+    useEffect(() => {
+        petService.getAll()
+            .then(pets => {
+                const sortedPets = pets.sort((a, b) => new Date(b.createdOn) - new Date(a.createdOn))
+                const top3NewestPets = sortedPets.slice(0, 3)
+
+                setPets(top3NewestPets)
+            })
+            .catch(error => {
+                console.error('Error fetching pets:', error);
+            });
+    }, [])
+
+
     return (
         <div className="min-h-screen flex flex-col">
             <div className="relative isolate px-6 pt-14 lg:px-8 flex-grow">
@@ -24,37 +45,23 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* New Section to showcase pets */}
             <div className="mx-auto max-w-7xl px-6 pb-16 sm:px-8">
-                <h2 className="text-4xl font-semibold text-center text-gray-900">Our Newest Additions</h2>
+                {newestPets.length > 0
+                ? <h2 className="text-4xl font-semibold text-center text-gray-900">Our Newest Additions</h2>
+                : <h2 className="text-4xl font-semibold text-center text-gray-900">We don't have any pets for adoption at the moment.</h2>
+                }
+
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="bg-white p-4 rounded-lg shadow-lg">
-                        <img
-                            src="https://placedog.net/400/300"
-                            alt="Adoptable Dog 1"
-                            className="w-full h-48 object-cover rounded-lg"
-                        />
-                        <h3 className="mt-4 text-xl font-semibold text-gray-900">Buddy</h3>
-                        <p className="text-gray-500">Labrador Retriever, 2 years old</p>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg shadow-lg">
-                        <img
-                            src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg"
-                            alt="Adoptable Cat 1"
-                            className="w-full h-48 object-cover rounded-lg"
-                        />
-                        <h3 className="mt-4 text-xl font-semibold text-gray-900">Whiskers</h3>
-                        <p className="text-gray-500">Domestic Shorthair, 3 years old</p>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg shadow-lg">
-                        <img
-                            src="https://placedog.net/400/300?random=2"
-                            alt="Adoptable Dog 2"
-                            className="w-full h-48 object-cover rounded-lg"
-                        />
-                        <h3 className="mt-4 text-xl font-semibold text-gray-900">Bella</h3>
-                        <p className="text-gray-500">German Shepherd, 1.5 years old</p>
-                    </div>
+                    {newestPets.length > 0 &&
+                        newestPets.map(pet => <NewestPet
+                        key={pet._id}
+                        id={pet._id}
+                        name={pet.name}
+                        imageUrl={pet.imageUrl}
+                        breed={pet.breed}
+                        age={pet.age} 
+                        />)
+                    }
                 </div>
             </div>
         </div>
