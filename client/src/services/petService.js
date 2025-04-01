@@ -38,22 +38,27 @@ export default {
     },
     async createPet(petData) {
         try {
+            const petWithDate = {
+                ...petData,
+                createdOn: new Date().toISOString(),
+            };
+    
             const response = await fetch(baseUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(petData),
+                body: JSON.stringify(petWithDate),
             });
-
+    
             const result = await response.json();
             return result;
-
+    
         } catch (error) {
             console.error("Fetch Error:", error);
             throw error;
         }
-    },
+    },    
     async editPet(petId, petData) {
         try {
             const response = await fetch(`${baseUrl}/${petId}`, {
