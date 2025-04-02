@@ -13,6 +13,7 @@ import Logout from './logout/Logout'
 import ContactUs from './contactUs/ContactUs'
 
 import './App.css'
+import Footer from './footer/Footer'
 
 export default function App() {
   const [authData, setAuthData] = useState({});
@@ -41,6 +42,7 @@ export default function App() {
             <Route path='/contact-us' element={<ContactUs/>} />
           </Routes>
         </main>
+        <Footer/>
       </div>
     </UserContext.Provider>
   )
