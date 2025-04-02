@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaceSmileIcon, StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
 import { Link, useNavigate, useParams } from "react-router";
 import petService from '../../services/petService';
 import EditPet from '../editPet/EditPet';
 import DeletePet from '../deletePet/DeletePet';
+import { UserContext } from '../../context/UserContext';
 
 export default function PetDetails() {
 
 
+    const { _id } = useContext(UserContext);
     const [isUpdated, setIsUpdated] = useState(false)
     const [isEditModalVisible, setEditModal] = useState(false)
     const [isDeleteModalVisible, setDeleteModal] = useState(false)
     const [currentPet, setPet] = useState({})
     const { petId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         petService.getPetById(petId)
@@ -21,6 +24,12 @@ export default function PetDetails() {
     }, [petId])
 
 
+    const requestForAdoptionClickHandler = (e) => {
+        if(_id === undefined){
+            navigate("/login")
+        }
+        e.preventDefault()
+    }
     const openEditModalClickHandler = () => {
         setEditModal(true)
     }
@@ -40,6 +49,8 @@ export default function PetDetails() {
 
     return (
         <div className="min-h-screen pt-30">
+            {console.log(_id)}
+            {console.log(currentPet.ownerId)}
 
             {isEditModalVisible && (
                 <EditPet
@@ -79,25 +90,29 @@ export default function PetDetails() {
                                 <button
                                     type="submit"
                                     className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-orange-400 px-6 py-3 text-base font-medium text-white hover:bg-orange-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                    onClick={requestForAdoptionClickHandler}
                                 >
                                     Request Adoption
                                 </button>
 
-                                <button
-                                    type="button"
-                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-green-500 px-6 py-3 text-base font-medium text-white hover:bg-green-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
-                                    onClick={openEditModalClickHandler}
-                                >
-                                    Edit
-                                </button>
+                                {_id === currentPet.ownerId &&
+                                    <>
+                                        <button
+                                            type="button"
+                                            className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-green-500 px-6 py-3 text-base font-medium text-white hover:bg-green-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                            onClick={openEditModalClickHandler}
+                                        >
+                                            Edit
+                                        </button>
 
-                                <button
-                                    type="button"
-                                    className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
-                                    onClick={openDeleteModalClickHandler}
-                                >
-                                    Delete
-                                </button>
+                                        <button
+                                            type="button"
+                                            className="w-full max-w-[200px] flex items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                                            onClick={openDeleteModalClickHandler}
+                                        >
+                                            Delete
+                                        </button>
+                                    </>}
                             </div>
                         </form>
 
