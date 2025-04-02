@@ -3,7 +3,7 @@ import petService from "../../services/petService";
 import NewestPet from "./newestAdditions/NewestPet";
 
 export default function Home() {
-
+    
     const [newestPets, setPets] = useState([])
 
     useEffect(() => {
