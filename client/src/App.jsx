@@ -6,6 +6,7 @@ import Home from './components/home/Home'
 import PetDetails from './components/Details/Pet-Details'
 import CreatePet from './components/CreatePet/createPet'
 import Register from './registerUser/Register'
+import Login from './loginUser/Login'
 
 
 export default function App() {
@@ -22,7 +23,7 @@ export default function App() {
           <Route path='/pets/details/:petId' element={<PetDetails />} />
           <Route path='/put-up-for-adoption' element={<CreatePet />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<CreatePet />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/logout' element={<h1>logout</h1>} />
         </Routes>
       </main>
