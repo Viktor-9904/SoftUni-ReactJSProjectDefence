@@ -1,7 +1,7 @@
 
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRegister } from "../api/authApi";
+import { useRegister } from "../../api/authApi";
 import { UserContext } from "../context/UserContext";
 
 export default function Register() {
