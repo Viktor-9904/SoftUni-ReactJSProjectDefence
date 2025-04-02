@@ -9,10 +9,10 @@ import PetDetails from './components/Details/Pet-Details'
 import CreatePet from './components/CreatePet/createPet'
 import Register from './registerUser/Register'
 import Login from './loginUser/Login'
+import Logout from './logout/Logout'
+import ContactUs from './contactUs/ContactUs'
 
 import './App.css'
-import Logout from './logout/Logout'
-
 
 export default function App() {
   const [authData, setAuthData] = useState({});
@@ -38,6 +38,7 @@ export default function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout/>} />
+            <Route path='/contact-us' element={<ContactUs/>} />
           </Routes>
         </main>
       </div>

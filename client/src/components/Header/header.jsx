@@ -10,7 +10,7 @@ const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Meet Our Pets', href: '/pets' },
     { name: 'Put Up Pet For Adoption', href: 'put-up-for-adoption' },
-    { name: 'Contact Us', href: '#' },
+    { name: 'Contact Us', href: 'contact-us' },
 ]
 
 export default function Header() {
