@@ -5,16 +5,13 @@ This is a **React Single Page Application (SPA)** for a **Pet Adoption Center**.
 ## **Key Features:**
 
 - **Adopt a Pet**:  
-  Users can browse available pets and request adoption. The **"Request Adoption"** button is currently a placeholder and will be fully functional in future versions.
+  Users can browse available pets and request adoption.
 
 - **Put up Pets for Adoption**:  
   Registered users can add new pets for adoption. They can upload pet details, such as name, breed, age, and upload photos to share with others. 
 
 - **Edit and Delete Pets**:  
   Users have full control over pets they have added. They can modify the pet details or remove pets from the adoption listing.
-
-- **User Authentication**:  
-  Users can **register**, **log in**, and **log out**. This allows them to manage their pet details, and only authorized users can add, edit, or delete pets.
 
 - **User Profile Integration**:  
   Each pet added for adoption is associated with a user (the pet’s **"owner"**), allowing for better tracking and management of pet listings.
