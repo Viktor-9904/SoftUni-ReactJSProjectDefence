@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import EditPet from "../components/editPet/EditPet";
+import { UserContext } from "../context/UserContext";
 
 const baseUrl = 'http://localhost:3030/jsonstore/pets'
 
@@ -36,29 +38,30 @@ export default {
             throw error;
         }
     },
-    async createPet(petData) {
+    async createPet(petData, userId) {
         try {
-            const petWithDate = {
+            const processedPetData = {
                 ...petData,
                 createdOn: new Date().toISOString(),
+                ownerId: userId
             };
-    
+
             const response = await fetch(baseUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(petWithDate),
+                body: JSON.stringify(processedPetData),
             });
-    
+
             const result = await response.json();
             return result;
-    
+
         } catch (error) {
             console.error("Fetch Error:", error);
             throw error;
         }
-    },    
+    },
     async editPet(petId, petData) {
         try {
             const response = await fetch(`${baseUrl}/${petId}`, {
@@ -82,9 +85,9 @@ export default {
             const response = await fetch(`${baseUrl}/${petId}`, {
                 method: 'DELETE',
             });
-    
+
             const result = await response.json();
-    
+
             return result;
 
         } catch (error) {

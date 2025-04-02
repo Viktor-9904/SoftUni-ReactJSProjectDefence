@@ -7,10 +7,10 @@ export default function CreatePet() {
     const navigate = useNavigate()
     const { _id } = useContext(UserContext)
 
-    const submitAction = async (formData, e) => {
+    const submitAction = async (formData) => {
         const petData = Object.fromEntries(formData);
-
-        const result = await petService.createPet(petData)
+        const result = await petService.createPet(petData, _id)
+        
         navigate('/pets')
     };
 
