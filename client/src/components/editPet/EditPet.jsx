@@ -29,7 +29,9 @@ export default function EditPet(
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50 bg-orange-300/50" onClick={onClose}>
+        <div
+            className="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50 bg-orange-300/50"
+            onClick={onClose}>
             <div
                 className="bg-orange-300/80 rounded-lg shadow-lg p-6 w-full max-w-md relative"
                 onClick={(e) => e.stopPropagation()}
