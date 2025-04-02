@@ -1,3 +1,6 @@
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
+
 const baseUrl = 'http://localhost:3030/users';
 
 export const useRegister = () => {
@@ -35,9 +38,36 @@ export const useLogin = () => {
             },
             body: JSON.stringify({ email, password }),
         });
-        
+
         const result = await response.json();
         return result;
     }
-        return { login };
+    return { login };
+};
+export const useLogout = () => {
+    const { accessToken, userLogoutHandler } = useContext(UserContext);
+
+    useEffect(() => {
+        if (!accessToken) {
+            return;
+        }
+        const logoutUser = async () => {
+            const response = await fetch(`${baseUrl}/users/logout`, {
+                method: "GET",
+                headers: {
+                    "X-Authorization": accessToken,
+                },
+            });
+
+            if (response.status === 204) {
+                userLogoutHandler();
+            }
+        };
+
+        logoutUser();
+    }, [accessToken, userLogoutHandler]);
+
+    return {
+        isLoggedOut: !accessToken,
+    };
 };

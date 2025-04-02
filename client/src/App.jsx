@@ -11,6 +11,7 @@ import Register from './registerUser/Register'
 import Login from './loginUser/Login'
 
 import './App.css'
+import Logout from './logout/Logout'
 
 
 export default function App() {
@@ -36,7 +37,7 @@ export default function App() {
             <Route path='/put-up-for-adoption' element={<CreatePet />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/logout' element={<h1>logout</h1>} />
+            <Route path='/logout' element={<Logout/>} />
           </Routes>
         </main>
       </div>
