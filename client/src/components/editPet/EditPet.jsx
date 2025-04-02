@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import petService from '../../services/petService'
+import { UserContext } from '../../context/UserContext'
 
 export default function EditPet(
     {
@@ -8,6 +9,7 @@ export default function EditPet(
         onSubmit,
     }) {
 
+    const { _id } = useContext(UserContext)
     const navigate = useNavigate()
     const { petId } = useParams()
     const [pet, setPet] = useState({})
@@ -20,7 +22,7 @@ export default function EditPet(
     const formAciton = async (formData) => {
         const petData = Object.fromEntries(formData)
 
-        await petService.editPet(petId, petData)
+        await petService.editPet(petId, petData, _id)
 
         navigate(`/pets/details/${petId}`);
 

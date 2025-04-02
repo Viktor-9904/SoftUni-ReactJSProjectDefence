@@ -62,14 +62,20 @@ export default {
             throw error;
         }
     },
-    async editPet(petId, petData) {
+    async editPet(petId, petData, userId) {
         try {
+
+            const processedPetData = {
+                ...petData,
+                ownerId: userId
+            };
+
             const response = await fetch(`${baseUrl}/${petId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(petData),
+                body: JSON.stringify(processedPetData),
             });
 
             const result = await response.json();
